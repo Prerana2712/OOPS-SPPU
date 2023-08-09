@@ -1,0 +1,375 @@
+  // Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   2.	Write a program in Java language for maintaining a database of student records and perform the 
+   following operations. 
+	a.	Create Database 
+	b.	Display Database 
+	c.	Delete Records 
+	d.	Update Record
+	e.	Search Record 
+	f.	Insert the record
+
+*/
+//Source code:-
+package practical;
+import java.util.Scanner;
+class database{
+	
+	//Declaration of variables
+	private String name;
+	private String bloodgrp;
+	private int rollno;
+	private int percentage;
+	private String grade;
+	
+	
+	//Taking input from the user
+	void getdata(){
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("\nEnter the name of student:");
+		name=sc.next();
+		System.out.println("\nEnter the bloodgroup of student:");
+		bloodgrp=sc.next();
+		System.out.println("\nEnter the rollno of student:");
+		rollno=sc.nextInt();
+		System.out.println("\nEnter the percentage of student:");
+		percentage=sc.nextInt();
+		System.out.println("\nEnter the grade of student:");
+		grade=sc.next();
+		
+	}
+	
+	//Display the accepted output in tabular form
+	void display(){
+		
+		System.out.println(name+"\t"+bloodgrp+"\t"+rollno +"\t"+percentage+"\t"+grade);
+		
+	}
+	
+}
+
+
+public class studentdatabase {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	//Creating an array.
+	 database[] a=new database[15];
+	 int i;
+	 for(i=0;i<15;i++){
+		 a[i]=new database();
+			
+		}
+	 
+	 Scanner sc=new Scanner(System.in);
+	 
+	 int n;
+     
+	 //Input number of records user want in database
+	 System.out.println("\nEnter the no of records you want:");
+	 n=sc.nextInt();
+		
+	  for(i=0;i<n;i++){
+		    a[i].getdata();// CALLING GETDATA FUNCTION	
+	    }
+		
+	  int l;
+		
+	  do{
+		
+			//Accept the operation to be performed by user
+		System.out.println("Enter the operation to be performed\n1)Display\n2)Add \n3)Delete \n4)Modify\n5)Search\n6)Exit\n(1,2,3,4,5,6)"); 
+		l=sc.nextInt();
+		
+		switch(l){
+		
+		case 1:
+			
+		    System.out.println("\nName		Bloodgroup	Rollno	Percentage	grade");
+
+		    for(i=0;i<n;i++){
+		        a[i].display();// Calling display function.
+		    }
+		    break;
+		case 2:
+			
+			//Adding a record in the database
+			System.out.println("\nAdd the record :");
+			a[n].getdata();
+			
+			n=n+1;
+					
+		    System.out.println("\nUpdated database:");
+
+		    System.out.println("\nName		Bloodgroup	Rollno	Percentage	grade");
+
+		    for(i=0;i<n;i++){
+			      a[i].display();  
+		       }
+		    break;
+		   
+		case 3:
+
+			//Deleting a record in the database
+			int del;
+			
+			System.out.println("\nDelete the record :");
+			del=sc.nextInt();
+			
+			for(i=del-1;i<n;i++){
+				a[i]=a[i+1];
+			}
+			
+			n=n-1;
+			
+			 System.out.println("\nUpdated database:");
+
+                                                         System.out.println("\nName		Bloodgroup	Rollno	Percentage	grade");
+
+			 for(i=0;i<n;i++){
+				    a[i].display();  
+			   }
+			  
+			break;
+		
+		case 4:
+			
+			//Modify a record in database
+			int modify;
+			
+			System.out.println("\nEnter the record to modified :");
+			modify=sc.nextInt();
+			
+			a[modify-1].getdata();
+			
+			System.out.println("\nUpdated database:");
+
+			System.out.println("\nName		Bloodgroup	Rollno	Percentage	grade");
+
+			for(i=0;i<n;i++){
+				    a[i].display();  
+			  }
+			break;
+			
+			
+		case 5:
+			
+			//Searching a record in database
+			 int search;
+			 
+			 System.out.println("\nSearch the record:");
+			 search=sc.nextInt();
+			 
+                                                         System.out.println("\nName		Bloodgroup	Rollno	Percentage	grade");
+
+			 a[search-1].display();	
+			 
+			  break;
+			
+		case 6:
+			
+			System.out.println("\nThe end");
+			break;
+			
+		default:
+			System.out.println("\nwrong choice");
+		}
+		}while(l!=6);
+	}
+
+}
+
+*************************************************************************************OUTPUT***********************************************************************************************
+
+Enter the no of records you want:
+4
+
+Enter the name of student:
+Avik
+
+Enter the bloodgroup of student:
+A
+
+Enter the rollno of student:
+01
+
+Enter the percentage of student:
+82
+
+Enter the grade of student:
+B
+
+Enter the name of student:
+Bhim
+
+Enter the bloodgroup of student:
+B
+
+Enter the rollno of student:
+02
+
+Enter the percentage of student:
+90
+
+Enter the grade of student:
+A
+
+Enter the name of student:
+Cynthia
+
+Enter the bloodgroup of student:
+O
+
+Enter the rollno of student:
+03
+
+Enter the percentage of student:
+72
+
+Enter the grade of student:
+C
+
+Enter the name of student:
+Dhruv
+
+Enter the bloodgroup of student:
+B
+
+Enter the rollno of student:
+04
+
+Enter the percentage of student:
+92
+
+Enter the grade of student:
+A
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+1
+
+Name	Bloodgroup	Rollno	Percentage	grade
+Avik	A	1	82	B
+Bhim	B	2	90	A
+Cynthia	O	3	72	C
+Dhruv	B	4	92	A
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+2
+
+Add the record :
+
+Enter the name of student:
+Elu
+
+Enter the bloodgroup of student:
+O
+
+Enter the rollno of student:
+05
+
+Enter the percentage of student:
+89
+
+Enter the grade of student:
+B
+
+Updated database:
+Name	Bloodgroup	Rollno	Percentage	grade
+Avik	A	1	82	B
+Bhim	B	2	90	A
+Cynthia	O	3	72	C
+Dhruv	B	4	92	A
+Elu	O	5	89	B
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+3
+
+Delete the record :
+3
+
+Updated database:
+Name	Bloodgroup	Rollno	Percentage	grade
+Avik	A	1	82	B
+Bhim	B	2	90	A
+Dhruv	B	4	92	A
+Elu	O	5	89	B
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+4
+
+Enter the record to modified :
+1
+
+Enter the name of student:
+Anvik
+
+Enter the bloodgroup of student:
+A
+
+Enter the rollno of student:
+
+01
+
+Enter the percentage of student:
+85
+
+Enter the grade of student:
+B
+
+Updated database:
+Name	Bloodgroup	Rollno	Percentage	grade
+Anvik	A	1	85	B
+Bhim	B	2	90	A
+Dhruv	B	4	92	A
+Elu	O	5	89	B
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+5
+
+Search the record:
+4
+Name	Bloodgroup	Rollno	Percentage	grade
+Elu	O	5	89	B
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+6
+
+The end
