@@ -1,0 +1,378 @@
+    // Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   4.	Design a class ‘bag’ that consists of zero or more objects of the same type. Each object can be 
+   		described by its color and weight. Design a Java program to create a new object. This can be done 
+   		in two ways. If the user provides information about the color and/or weight of the object to be 
+   		created then this information will be used to create the object otherwise the object will be 
+   		created using default values for these attributes. Provide a facility to keep track of the total 
+   		number of objects and the total weight of objects from a bag. Use constructor, static variable, 
+   		and method.
+*/
+//Source code:-
+package practical;
+import java.util.Scanner;
+class balls
+{
+	private String color;
+	private int weight;
+
+	//Static variable declaration
+	static int a;
+	static int tw;
+	
+	
+	 //Constructor overloading
+	//Accepting weight from user
+	public balls(int w){  
+		color ="red";
+		weight=w;
+		tw=tw+weight;//Calculating total weight
+		a=a+1;//Incrementing count of total object by 1
+	}
+	
+	 //Constructor overloading
+	//Accepting color from user
+	public balls(String col){                  
+	    color=col;
+		weight=10 ;
+		tw=tw+weight;//Calculating total weight
+		a=a+1;//Incrementing count of total object by 1
+	}
+	
+	//Constructor overloading
+	//Accepting color and weight from user
+	public balls(String col,int w){
+		
+		color=col;
+	    weight=w;
+	    tw=tw+weight;//Calculating total weight
+	    a=a+1;//Incrementing count of total object by 1
+	}
+	
+	//Default constructor
+	public balls(){
+		color ="red";
+		weight=10;
+		tw=tw+weight;//Calculating total weight
+		a=a+1;//Incrementing count of total object by 1
+	}
+	
+	//To display color and weight of balls.
+	public void display(){
+		
+		System.out.println(color+"\t\t"+weight);
+	
+	}
+
+	//To decrement counter and reduce weight for deletion
+	public void decrement(){
+		a=a-1;
+		tw=tw-weight;
+	}
+	
+	//Static method to obtain total weight and count of object.
+	public static void total(){
+		System.out.println("Total weight of object"+tw);
+		System.out.println("Total count of object"+a);
+	}
+	
+	//Static method to initialize count of object as 0
+	public static int totalobj()
+	{
+		return a;
+	}
+}
+
+
+public class bags {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int k;
+		k=balls.totalobj();//Used to store value of incremented count,used static meathod to initialize k=0.
+		
+		int w;//weight
+		String col;//color
+		
+        //Creating an object of class in the form of array
+		balls b[]=new balls[15];
+		balls f[]=new balls[b.length];
+		int j;
+		
+		Scanner sc=new Scanner (System.in);
+		
+		
+		int l,m;
+		do {
+		
+	    // Accepting the operation to be performed by user
+		System.out.println("\nEnter the function to be performed\n1)Create\n2)Display & Total\n3)Delete\n4)Exit\n(1,2,3,4):");
+		l=sc.nextInt();
+		
+		switch(l){
+		case 1:
+			
+			do{
+				
+				//a
+			  System.out.println("\nEnter the choice of input to add\n1)default color,user weight\n2)user color,default weight\n3)user color,user weight\n4)default color and weight\n5)exit(1,2,3,4,5):");
+			  m=sc.nextInt();
+			
+			
+			switch(m){
+			case 1:
+				//Accepting weight of ball from user
+				System.out.println("\nWeight of ball:");
+				w=sc.nextInt();
+				
+				//Calling parameterized constructor by creating an object of class
+				b[k]=new balls(w);
+				
+				//Increment the counter by 1 i.e.k=k+1
+			    k=balls.totalobj();
+				break;
+			case 2:
+				//Accepting color of ball from user
+				System.out.println("\nColour of ball:");
+				col=sc.next();
+				
+				//Calling parameterized constructor by creating an object of class
+				b[k]=new balls(col);
+				
+				//Increment the counter by 1 i.e.k=k+1
+				k=balls.totalobj();
+				break;
+				
+			case 3:
+				//Accepting color and weight of ball from user
+				System.out.println("\nColour of ball:");
+				 col=sc.next();
+				System.out.println("\nWeight of ball:");
+			     w=sc.nextInt();
+				 
+			   //Calling parameterized constructor by creating an object of class 
+				b[k]=new balls(col,w);
+				 
+				//Increment the counter by 1 i.e.k=k+1 
+				k=balls.totalobj();
+				break;
+			case 4:
+				//Both color and weight are default
+				
+				//Calling default constructor by creating an object of class 
+				b[k]=new balls();
+				
+				//Increment the counter by 1 i.e.k=k+1 
+				k=balls.totalobj();
+				break;
+			case 5:
+				System.out.println("the end");
+				break;
+			default:
+				if(m!=5)
+				System.out.println("wrong choice");
+			}
+			
+			}while(m!=5);
+			break;
+		
+		case 2:
+		
+			System.out.println("color		weight");
+				
+			for(j=0;j<k;j++){
+				b[j].display();//Calling display method
+				f[j]=b[j];
+			}
+				
+			   
+			balls.total();//Calling total method.
+			break;
+		
+	    case 3:
+	    	
+			int del;
+			System.out.println("\ndelete:");//To delete a record.
+			del=sc.nextInt();
+			
+			int flag=0;
+			 for(int p=0;p<k;p++)
+			  {
+				  if(del<=k){
+					     for(p=del-1;p<k;p++){
+						      b[p]=b[p+1];
+						  }
+			              flag=1;
+			              k=k-1;
+							
+							System.out.println("\nUpdated record:");
+							System.out.println("\nColor\t\tWeight");
+			    			 for(p=0;p<k;p++){
+			    				    b[p].display();  
+			    			   }
+						       break;
+				  }
+			  }
+
+
+			 if(flag==0)
+	         {
+		        System.out.println("\nElement is not present in the array.");
+		       for(j=k;j<=del-1;j++){
+		    	   System.out.println("\nColour of ball:");
+					 col=sc.next();
+					System.out.println("\nWeight of ball:");
+				     w=sc.nextInt();
+					 
+				   //Calling parameterized constructor by creating an object of class 
+					f[k]=new balls(col,w);
+					 
+					//Increment the counter by 1 i.e.k=k+1 
+					k=balls.totalobj();
+		        }
+		       
+			
+			    k=k+1;
+			
+			 System.out.println("\nUpdated database:");
+			 
+			 System.out.println("color		weight");
+			 
+			 for(j=0;j<k+1;j++){
+				   
+				    f[j].display();  
+			   }
+			     
+	         }
+			
+		    break;
+		    
+		case 4:
+			System.exit(0);
+			
+		default:
+			System.out.println("wrong choice");
+			
+		}
+	    }while(l!=4);
+		
+		}
+}
+
+
+*******************************************************************************************OUTPUT****************************************************************************************
+
+Enter the function to be performed
+1)Create
+2)Display & Total
+3)Delete
+4)Exit
+(1,2,3,4):
+1
+
+Enter the choice of input to add
+1)default color,user weight
+2)user color,default weight
+3)user color,user weight
+4)default color and weight
+5)exit(1,2,3,4,5):
+1
+
+Weight of ball:
+15
+
+Enter the choice of input to add
+1)default color,user weight
+2)user color,default weight
+3)user color,user weight
+4)default color and weight
+5)exit(1,2,3,4,5):
+2
+
+Colour of ball:
+pink
+
+Enter the choice of input to add
+1)default color,user weight
+2)user color,default weight
+3)user color,user weight
+4)default color and weight
+5)exit(1,2,3,4,5):
+3
+
+Colour of ball:
+blue
+
+Weight of ball:
+45
+
+Enter the choice of input to add
+1)default color,user weight
+2)user color,default weight
+3)user color,user weight
+4)default color and weight
+5)exit(1,2,3,4,5):
+4
+
+Enter the choice of input to add
+1)default color,user weight
+2)user color,default weight
+3)user color,user weight
+4)default color and weight
+5)exit(1,2,3,4,5):
+5
+the end
+
+Enter the function to be performed
+1)Create
+2)Display & Total
+3)Delete
+4)Exit
+(1,2,3,4):
+2
+color		weight
+red		15
+pink		10
+blue		45
+red		10
+Total weight of object80
+Total count of object4
+
+Enter the function to be performed
+1)Create
+2)Display & Total
+3)Delete
+4)Exit
+(1,2,3,4):
+3
+
+delete:
+2
+
+Enter the function to be performed
+1)Create
+2)Display & Total
+3)Delete
+4)Exit
+(1,2,3,4):
+2
+color		weight
+red		15
+blue		45
+red		10
+Total weight of object35
+Total count of object3
+
+Enter the function to be performed
+1)Create
+2)Display & Total
+3)Delete
+4)Exit
+(1,2,3,4):
+4
+
+
+
+
+

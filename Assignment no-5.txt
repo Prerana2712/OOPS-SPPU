@@ -1,0 +1,290 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   5.	Define two classes to store distance. One of the classes should store distance in centimeters and meters and
+   	    other should store distance in feet's and inches. Read two distances, one for each class and compute sum or 
+		differences between them as par the user's choice. Display answer in the unit provided by user. Use friend
+		function, function overloading, constructors etc.
+*/
+//Source code:-
+#include <iostream>
+using namespace std;
+
+class Distance2;//forward declaration of class
+
+class Distance1
+{
+	private:
+		int meter,centimeter;
+	public:
+
+		//parameterised constructor
+		Distance1(float m,float cm){
+			meter=m;
+			centimeter=cm;
+		}
+		void display();
+		
+		friend Distance1 add(Distance1,Distance2);//friend function
+		friend Distance2 add(Distance2,Distance1);//friend function
+		friend Distance1 sub(Distance1,Distance2);//friend function
+		friend Distance2 sub(Distance2,Distance1);//friend function
+};
+
+void Distance1::display(){
+		cout<<"\t\n"<<meter<<"meter"<<"\t"<<centimeter<<"centimeter";
+}
+
+class Distance2{
+	private:
+		float feet;
+		float inches;
+	public:
+
+		//parameterised constructor
+		Distance2(float f,float i){
+			feet=f;
+			inches=i;
+		}
+		
+		void display();
+		
+		friend Distance2 add(Distance2,Distance1);//friend function
+		friend Distance1 add(Distance1,Distance2);//friend function
+		friend Distance2 sub(Distance2,Distance1);//friend function
+		friend Distance1 sub(Distance1,Distance2);//friend function
+};
+
+void Distance2::display(){
+		cout<<"\t\n"<<feet<<"feet"<<"\t"<<inches<<"inches";
+
+}
+
+//to perform addition in meter and centimeter form
+Distance1 add(Distance1 x,Distance2 y){
+
+  	int t_cm=(x.meter*100+x.centimeter)+(y.feet*12+y.inches)*2.54;
+  	int meter ,centimeter;
+  	meter=t_cm/100;
+  	centimeter=t_cm % 100;
+  	Distance1 z(meter,centimeter);
+  	return z;
+  	
+}
+
+//to perform addition in foot and inches form
+Distance2 add(Distance2 y,Distance1 x){
+
+  	int t_in=(x.meter*39.37+x.centimeter*0.3937008)+(y.feet*12+y.inches);
+  	int feet ,inches;
+  	feet=t_in/12;
+  	inches=t_in % 12;
+  	Distance2 z(feet,inches);
+  	return z;
+}
+
+//to perform substraction in meter and centimeter form
+Distance1 sub(Distance1 x,Distance2 y){
+
+  	int t_cm=(x.meter*100+x.centimeter)-(y.feet*12+y.inches)*2.54;
+  	int meter ,centimeter;
+  	meter=t_cm/100;
+  	centimeter=t_cm % 100;
+  	Distance1 z(meter,centimeter);
+  	return z;
+  	
+}
+
+//to perform substraction in foot and inches form
+Distance2 sub(Distance2 y,Distance1 x){
+
+  	int t_in=(x.meter*39.37+x.centimeter*0.3937008)-(y.feet*12+y.inches);
+  	int feet ,inches;
+  	feet=t_in/12;
+  	inches=t_in % 12;
+  	Distance2 z(feet,inches);
+  	return z;
+}
+
+int main(){
+	
+	//accepting values of meter, centimeter,feet and inches.
+	int mt;
+	cout<<"\nEnter the meter value:";
+	cin>>mt;
+	int cm;
+	cout<<"\nEnter the centimeter value:";
+	cin>>cm;
+	
+	Distance1 m2(mt,cm);
+	
+	int f;
+	cout<<"\nEnter the feet value:";
+	cin>>f;
+	int in;
+	cout<<"\nEnter the inches value:";
+	cin>>in;
+	
+	Distance2 f2(f,in);
+	
+	Distance1 m3= add(m2,f2);
+	Distance2 f3= add(f2,m2);
+	
+	Distance1 m4= sub(m2,f2);
+	Distance2 f4= sub(f2,m2);
+	int l;
+	do{
+		cout<<"\nEnter the operation to be performed\n1)Display\n2)Addition\n3)Substraction\n4)Exit\n(1,2,3,4):";
+		cin>>l;
+		switch(l){
+			
+			case 1:
+			
+				cout<<"\nMeter value and Centimeter value using paramertised constructor:";
+				m2.display();
+				
+				cout<<"\nFoot value and Inches value using parameterised constructor:";
+				f2.display();
+			
+				break;
+				
+			case 2:
+				int k;
+				do{
+					cout<<"\nWhich form of output you want\n1)Meter and Centimeter form\n2)Feet and Inches form\n3)Exit\n(1,2,3):";
+				
+					cin>>k;
+					switch(k){
+					case 1:
+						cout<<"\nTotal Distance in meter and centimeter :";
+						m3.display();
+						break;
+					case 2:
+					    cout<<"\nTotal Distance in feet and inches :";
+						f3.display();
+						break;
+					case 3:
+					    cout<<"the end";
+					    break;
+					default:
+						cout<<"wrong choice"; 			
+			   		}
+				}while(k!=3);
+				break;
+			case 3:
+				int m;
+				do{
+					cout<<"\nWhich form of output you want\n1)Meter and Centimeter form\n2)Feet and Inches form\n3)Exit\n(1,2,3):";
+				
+					cin>>m;
+					switch(m){
+					case 1:
+						cout<<"\nTotal Distance in meter and centimeter :";
+						m4.display();
+						break;
+					case 2:
+					    cout<<"\nTotal Distance in feet and inches :";
+						f4.display();
+						break;
+					case 3:
+					    cout<<"the end";
+					    break;
+					default:
+						cout<<"wrong choice"; 			
+			   		}
+				}while(m!=3);
+				break;
+			case 4:
+				cout<<"the end";
+				break;
+				
+			default:
+				cout<<"wrong choice";
+       }
+	}while(l!=4);
+}
+****************************************************************************************************OUTPUT**************************************************************************************************
+
+Enter the meter value:4
+
+Enter the centimeter value:15
+
+Enter the feet value:5
+
+Enter the inches value:10
+
+Enter the operation to be performed
+1)Display
+2)Addition
+3)Substraction
+4)Exit
+(1,2,3,4):1
+
+Meter value and Centimeter value using paramertised constructor:
+4meter  15centimeter
+Foot value and Inches value using parameterised constructor:
+5feet   10inches
+Enter the operation to be performed
+1)Display
+2)Addition
+3)Substraction
+4)Exit
+(1,2,3,4):2
+
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):1
+
+Total Distance in meter and centimeter :
+5meter  92centimeter
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):2
+
+Total Distance in feet and inches :
+19feet  5inches
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):3
+the end
+Enter the operation to be performed
+1)Display
+2)Addition
+3)Substraction
+4)Exit
+(1,2,3,4):3
+
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):1
+
+Total Distance in meter and centimeter :
+2meter  37centimeter
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):2
+
+Total Distance in feet and inches :
+7feet   9inches
+Which form of output you want
+1)Meter and Centimeter form
+2)Feet and Inches form
+3)Exit
+(1,2,3):3
+the end
+Enter the operation to be performed
+1)Display
+2)Addition
+3)Substraction
+4)Exit
+(1,2,3,4):4
+the end

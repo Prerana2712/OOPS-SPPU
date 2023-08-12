@@ -1,0 +1,210 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   3.	Design a class ‘Complex ‘with data members for the real and imaginary parts. Provide default and 
+   		Parameterized constructors. Write a program to perform arithmetic operations (add, subtract, multiply,
+   		and divide) of two complex numbers.
+*/
+//Source code:-
+package practical;
+import java.util.Scanner;
+
+class oper{
+	private float real,img;
+	
+	//Default constructor
+	public oper() {
+		real=img=0.0f;
+	}
+	
+	//Parameterized constructor
+	public oper(float r,float i) {
+		real=r;
+		img=i;
+	}
+	
+	//Copy constructor
+	public oper(oper x,oper y)
+	{
+		real=x.real;
+		img=y.img;
+	}
+	
+	//to display copy constructor
+	public void display()
+	{
+		System.out.println("\nthe first number is:");
+		System.out.println(real+ "+"+img+ "i");
+	}
+	//Addition of two complex numbers.
+	public void add(oper p,oper q){
+		real=p.real+q.real;
+		img=p.img+q.img;
+		System.out.println(real+"+"+img+"i");
+	}
+	
+	//Substraction of two complex numbers.
+	public void sub(oper p,oper q){
+		real=p.real-q.real;
+		img=p.img-q.img;
+		System.out.println(real+"+"+img+"i");
+	}
+	
+	//Multiplication of two complex numbers.
+	public void mul(oper p,oper q){
+	//  (a+bi)(c+di)=(ac-bd)+(ad+bc)i  
+		real=(p.real*q.real)-(p.img*q.img);
+	    img=(p.real*q.img)+(p.img*q.real);
+	    System.out.println(real+"+"+img+"i");
+	}
+
+	//Division of two complex numbers.
+	public void div(oper p,oper q){
+		//{a+bi}/{c+di}={(c-di)(a+bi)}/{(c-di)(c+di)}=(ac+bd)/(c^2+d^2)+(bc-ad)i/(c^2+d^2)
+		real=((p.real*q.real)+(p.img*q.img))/((q.real*q.real)+(q.img*q.img));
+		img=((q.img*q.real)-(p.real*q.img))/((q.real*q.real)+(q.img*q.img));
+		System.out.println(real+"+"+img+"i");
+		
+	}
+}
+
+public class complexoper {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		float real1,img1,real2,img2;
+		Scanner s=new Scanner(System.in);
+
+		
+		//Taking input from user
+		System.out.println("\n the first no:");//a+bi
+		real1=s.nextFloat();
+		img1=s.nextFloat();
+		System.out.println("\n the second no:");//c+di
+		real2=s.nextFloat();
+		img2=s.nextFloat();
+		
+		int l;
+		oper c1=new oper(real1,img1);
+		oper c2=new oper(real2,img2);
+		oper c3=new oper();
+		
+		do{
+		
+			//Accepting the operation to be performed from the user
+		System.out.println("\n enter the function to be performed:\n1)addition\n2)substraction\n3)multiplication\n4)division\n5)copycons\n6)exit(1,2,3,4,5):");
+		l=s.nextInt();
+		switch (l){
+		case 1:
+	         System.out.println("\n the addition is:");
+			c3.add(c1,c2);//Calling addition function
+			break;
+		case 2:
+			System.out.println("\n the substraction is:");
+			c3.sub(c1,c2);//Calling substraction function
+			break;
+		case 3:
+			System.out.println("\n the multiplication is:");
+			c3.mul(c1,c2);//Calling multiplication function
+			break;
+		case 4:
+			System.out.println("\n the division is:");
+			c3.div(c1,c2);//Calling division function
+			break;
+		case 5:
+			oper c4=new oper(real1,real2);
+			c4.display();
+			break;
+		case 6:
+			System.out.println("\n the end");
+			break;
+		default:
+			System.out.println("\n wrong choice");
+		}
+		}while(l!=6);
+		
+		}
+
+}
+
+
+********************************************************************************OUTPUT***************************************************************************************************
+
+ the first no:
+3
+2
+
+ the second no:
+2
+2
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+1
+
+ the addition is:
+5.0+4.0i
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+2
+
+ the substraction is:
+1.0+0.0i
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+3
+
+ the multiplication is:
+2.0+10.0i
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+4
+
+ the division is:
+1.25+-0.25i
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+5
+
+the first number is:
+3.0+2.0i
+
+ enter the function to be performed:
+1)addition
+2)substraction
+3)multiplication
+4)division
+5)copycons
+6)exit(1,2,3,4,5):
+6
+
+ the end
