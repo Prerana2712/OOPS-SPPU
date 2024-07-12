@@ -1,0 +1,176 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   8.	Design a base class shape method compute_area() for calculating area of shape. Derive three classes:
+    	triangle, rectangle, and circle. Make compute_area() as overriding method and redefine this method 
+    	in the derived class to suit their requirements. Write a program that accepts dimensions of triangle
+    	/rectangle/circle and display calculated area. Implement dynamic binding for given case study.
+
+*/
+//Source code:-
+//Hierarchical type of inheritance 
+//run time polymorphism:- method overriding and virtual function
+package program2;
+
+import java.util.Scanner;
+
+//Template class
+abstract class shape {
+ 
+	abstract public void compute_area(); //Do-nothing method
+		
+	abstract public void display(); //Do-nothing method
+	
+}
+
+// To calculate area of rectangle
+class rectangle extends shape
+{
+	
+	private float x,y,t;
+	
+	public void compute_area() {
+		Scanner s=new Scanner(System.in);
+		System.out.print("\nEnter the length:");
+		 x=s.nextFloat();
+		System.out.print("\nEnter the breadth:");
+		y=s.nextFloat();
+		t=x*y;
+	}
+	
+	public void display() {
+		System.out.print("\nArea of  rectangle is :"+t);
+	}
+}
+
+// To calculate area of triangle
+class triangle extends shape {
+	
+	private float x,y;
+	private double t;
+	
+	public void compute_area() {
+		Scanner s=new Scanner(System.in);
+		double f=0.5;
+		System.out.print("\nEnter the base:");
+		 x=s.nextFloat();
+		System.out.print("\nEnter the height:"); 
+		y=s.nextFloat();
+		t=x*y*f;
+		
+	}
+	
+	public void display() {
+		System.out.print("\nArea of triangle is :"+t);
+	}
+
+}
+
+// To calculate area of circle
+class circle extends shape {
+	
+	private float x;
+	private double t;
+
+	public void compute_area() {
+		Scanner s=new Scanner(System.in);
+		System.out.print("\nEnter the radius:");
+		 x=s.nextFloat();
+		t=3.14*x*x;
+	}
+	
+	public void display() {
+		System.out.print("\nArea of  circle is :"+t);
+	}
+}
+public class Area01 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner sc=new Scanner(System.in);
+		
+		int m;
+		do {
+		System.out.println("\nEnter the operation to be performed:");
+		System.out.println("1)Calculate area of triangle");
+		System.out.println("2)Calculate area of rectangle");
+		System.out.println("3)Calculate area of circle");
+		System.out.println("4)Exit");
+		System.out.println("(1,2,3,4)");
+		
+		
+		m=sc.nextInt();
+		
+		switch(m) {
+		case 1:
+			shape obj1=new triangle();//reference variable pointing to object of derived class
+			obj1.compute_area();
+			obj1.display();
+			break;
+		case 2:
+			shape obj2=new rectangle();
+			obj2.compute_area();
+			obj2.display();
+			break;
+		case 3:
+			shape obj3=new circle();
+			obj3.compute_area();
+			obj3.display();
+			break;
+		case 4:
+			System.out.println("The end");
+			break;
+		default:
+			System.out.println("Wrong choice");
+		}
+	}while(m!=4);
+		}
+}
+
+*****************************************************************************************************OUTPUT*************************************************************************************************
+
+Enter the operation to be performed:
+1)Calculate area of triangle
+2)Calculate area of rectangle
+3)Calculate area of circle
+4)Exit
+(1,2,3,4)
+1
+
+Enter the base:2
+
+Enter the height:4
+
+Area of triangle is :4.0
+Enter the operation to be performed:
+1)Calculate area of triangle
+2)Calculate area of rectangle
+3)Calculate area of circle
+4)Exit
+(1,2,3,4)
+2
+
+Enter the length:3
+
+Enter the breadth:6
+
+Area of  rectangle is :18.0
+Enter the operation to be performed:
+1)Calculate area of triangle
+2)Calculate area of rectangle
+3)Calculate area of circle
+4)Exit
+(1,2,3,4)
+3
+
+Enter the radius:2
+
+Area of  circle is :12.56
+Enter the operation to be performed:
+1)Calculate area of triangle
+2)Calculate area of rectangle
+3)Calculate area of circle
+4)Exit
+(1,2,3,4)
+4
+The end

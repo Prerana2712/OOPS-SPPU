@@ -1,0 +1,193 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*
+	5.	Create an array list (ArrayList class) of characters with following operations:
+	a.	Add
+	b.	Display
+	c.	Delete
+	d.	Modify
+	Validate data type and throw exception. 
+
+*/
+//Source code:-
+import java.util.ArrayList;
+
+import java.util.Scanner;
+
+class Validate_data_type extends RuntimeException{
+	Validate_data_type(String message){
+		super(message);
+	}
+}
+public class Prsample5 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int l;
+		Scanner sc= new Scanner(System.in);	
+			ArrayList<Character> obj1= new ArrayList<Character>();
+			do
+			{
+				//Accept the operation to be performed by user
+				System.out.println("Enter the operation to perform:");
+				System.out.println("1)Insert");
+				System.out.println("2)Display");
+				System.out.println("3)Delete");
+				System.out.println("4)Modify");
+				System.out.println("5)Exit");
+				System.out.println("(1,2,3,4,5):");
+				l=sc.nextInt();
+			switch(l)
+			{
+			case 1:
+				//INSERTING AN STRING IN ARRAYLIST
+				char element;
+				boolean a;
+				System.out.println("Enter the element:");
+				
+					try {
+							element=sc.next().charAt(0);
+
+							a=Character.isAlphabetic(element);
+							if(a==false) {
+							throw new Validate_data_type("sorry wrong data type");
+							
+							}
+							else {
+								obj1.add(element);
+							}
+			      
+						}
+						catch(Exception e){
+							System.out.println(e);
+				}
+				
+				
+				break;
+			
+			case 2:
+				//DISPLAYING THE ELEMENTS OF ARRAYLIST 
+				System.out.println(obj1);
+				break;
+			case 3:
+				int ele;
+				System.out.println("Enter the Character index to be deleted:");
+				ele=sc.nextInt();
+				obj1.remove(ele-1);
+				System.out.println(obj1);
+				break;
+			case 4:
+				int ele1;
+				char mod;
+				System.out.println("Enter the Character index to be modify:");
+				ele1=sc.nextInt();
+				System.out.println("Enter the Character data to be replace:");
+				mod=sc.next().charAt(0);
+				obj1.set(ele1-1, mod);
+				System.out.println(obj1);
+				break;
+			case  5:
+			System.out.println("The end");
+			break;
+			default: 
+				System.out.println("Wrong choice");
+			}
+	}while(l!=5);
+
+	}
+
+}
+************************************************************************************************OUTPUT******************************************************************************************************
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+1
+Enter the element:
+A
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+1
+Enter the element:
+1
+Validate_data_type: sorry wrong data type
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+1
+Enter the element:
+B
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+1
+Enter the element:
+C
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+1
+Enter the element:
+D
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+2
+[A, B, C, D]
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+3
+Enter the Character index to be deleted:
+3
+[A, B, D]
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+4
+Enter the Character index to be modify:
+1
+Enter the Character data to be replace:
+E
+[E, B, D]
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Delete
+4)Modify
+5)Exit
+(1,2,3,4,5):
+5
+The end

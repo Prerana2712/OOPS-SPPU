@@ -1,0 +1,362 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   11.	Implement a generic program using any collection class to count the number of elements in a collection
+    	that have a specific property such as even numbers, odd number, prime number and palindromes.
+
+*/
+//Source code:-
+package practical;
+import java.util.*;
+
+public class Arraylist {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int l;
+		Scanner sc= new Scanner(System.in);
+		
+	do
+	{
+		//Accept the operation to be performed by user
+		System.out.println("Enter the operation to perform:");
+		System.out.println("1)Interger Array");
+		System.out.println("2)String Array");
+		System.out.println("3)Exit");
+		System.out.println("(1,2,3):");
+		l=sc.nextInt();
+		switch(l) {
+		
+		case 1:
+			
+			ArrayList<Integer> obj= new ArrayList<Integer>();
+			int m;
+			do
+			{
+				//Accept the operation to be performed by user
+			System.out.println("Enter the operation to perform:");
+			System.out.println("1)Insert");
+			System.out.println("2)Display");
+			System.out.println("3)Even");
+			System.out.println("4)Odd");
+			System.out.println("5)Prime");
+			System.out.println("6)Exit");
+			System.out.println("(1,2,3,4,5,6):");
+			m=sc.nextInt();
+			switch(m)
+			{
+			case 1:
+				//INSERTING AN INTEGER ELEMENTS IN ARRAYLIST
+				int element;
+				System.out.println("Enter the element:");
+				element=sc.nextInt();
+				obj.add(element);
+				break;
+			case 2:
+				//DISPLAYING THE ELEMENTS OF ARRAYLIST 
+				System.out.println(obj);
+				break;
+			case 3:
+				//TO COUNT EVEN NUMBERS PRESENT IN ARRAYLIST.
+				int c=0;//SET COUNTER TO 0
+				for(int i=0;i<obj.size();i++)
+				{
+					//IF DIVISIBLE BY 2 AND REMAINDER IS 0 NUMBER IS EVEN NUMBER
+					if(obj.get(i)%2==0)
+					{
+						c++;//INCREMENT COUNTER BY 1
+					}
+				}
+				System.out.println("Even number count is:"+c);
+				break;
+			case 4:
+				//TO COUNT ODD NUMBERS PRESENT IN ARRAYLIST.
+				int c1=0;//SET COUNTER TO 0
+				for(int i=0;i<obj.size();i++)
+				{
+					//IF NOT DIVISIBLE BY 2 AND REMAINDER IS NOT 0 NUMBER IS ODD NUMBER
+					if(obj.get(i)%2!=0)
+					{
+						c1++;//INCREMENT COUNTER BY 1
+					}
+				}
+				System.out.println("Odd number count is:"+c1);
+				break;
+			case 5:
+				//TO COUNT PRIME NUMBERS PRESENT IN ARRAYLIST.
+				int flag= 0;//SET FLAG TO 0
+			    int p=0;//INITIALISE COUNT TO ZERO
+			  
+			    for(int i=0;i<obj.size();i++){
+				   
+			    	if(obj.get(i)==1){
+						System.out.println("\n1 number is not prime:");
+					}
+			    	
+					else{
+						for(int j=2;j<=obj.get(i)/2;j++){
+							
+							if(obj.get(i)%j==0){
+								flag=1;
+								break;
+							}
+						}
+						//IF FLAG IS EQUALS TO 0 INCREMENT P BY 1.
+						if(flag==0) {
+							p=p+1;
+				
+						}
+					}
+			    }
+			    System.out.println("\nThe prime number is:"+p);  
+				break;
+			case 6:
+				break;
+			default:
+				System.out.println("Wrong choice");
+			}
+			
+			}while(m!=6);
+			
+			break;
+		case 2:
+			
+			ArrayList<String> obj1= new ArrayList<String>();
+			int k;
+			do
+			{
+				//Accept the operation to be performed by user
+				System.out.println("Enter the operation to perform:");
+				System.out.println("1)Insert");
+				System.out.println("2)Display");
+				System.out.println("3)Palindrome");
+				System.out.println("4)Exit");
+				System.out.println("(1,2,3,4):");
+				k=sc.nextInt();
+			switch(k)
+			{
+			case 1:
+				//INSERTING AN STRING IN ARRAYLIST
+				String element;
+				System.out.println("Enter the element:");
+				element=sc.next();
+				obj1.add(element);
+				break;
+			
+			case 2:
+				//DISPLAYING THE ELEMENTS OF ARRAYLIST 
+				System.out.println(obj1);
+				break;
+			case 3:
+				//TO COUNT NUMBER OF PALINDROME PRESENT IN ARRAYLIST.
+				int count = 0;
+				
+				for(int i=0;i<obj1.size();i++)
+	            {
+					String data = obj1.get(i);
+					String reverse = "";//TO STORE THE REVERSE STRING 
+					int len = data.length();//TO STORE THE LENGTH OF THE STRING 
+					for(int j = len-1; j>=0; j--)
+					{
+						char y = data.charAt(j);
+						reverse = reverse+ y;
+					}
+					
+	    	       if(data.equals(reverse))
+	    	       {
+	    		     count=count+1;
+	    	       }
+	            } 
+				System.out.println(count);
+				break;
+			case 4:
+				break;
+			default:
+				System.out.println("Wrong choice");
+			}
+			}while(k!=4);
+				break;
+		case  3:
+			System.out.println("The end");
+			break;
+		default: 
+		System.out.println("Wrong choice");
+		}
+	}while(l!=3);
+	}
+}
+
+************************************************************************************************OUTPUT******************************************************************************************************
+Enter the operation to perform:
+1)Interger Array
+2)String Array
+3)Exit
+(1,2,3):
+1
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+1
+Enter the element:
+1
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+1
+Enter the element:
+2
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+1
+Enter the element:
+3
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+1
+Enter the element:
+4
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+2
+[1, 2, 3, 4]
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+3
+Even number count is:2
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+4
+Odd number count is:2
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+5
+
+1 number is not prime:
+
+The prime number is:2
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Even
+4)Odd
+5)Prime
+6)Exit
+(1,2,3,4,5,6):
+6
+Enter the operation to perform:
+1)Interger Array
+2)String Array
+3)Exit
+(1,2,3):
+2
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+1
+Enter the element:
+RADAR
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+1
+Enter the element:
+MADAM
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+1
+Enter the element:
+SIR
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+1
+Enter the element:
+LEVEL
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+2
+[RADAR, MADAM, SIR, LEVEL]
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+3
+Palindrome count is:3
+Enter the operation to perform:
+1)Insert
+2)Display
+3)Palindrome
+4)Exit
+(1,2,3,4):
+4
+Enter the operation to perform:
+1)Interger Array
+2)String Array
+3)Exit
+(1,2,3):
+3
+The end

@@ -1,0 +1,172 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*
+	3.	An electricity board charges the following rates to domestic users to discourage large consumption of energy:
+		For the first 100 units – 60P per unit
+		For the next 200 units – 80P per unit
+		Beyond 300 units – 90P per unit
+		All users are charges a minimum of Rs. 50.00 if the total amount is more than Rs. 300.00 then an additional sub charge of 15% is 
+		added.
+		Design a program to read the names of users and number of units consumed and print out the charges with names.
+
+*/
+//Source code:-
+import java.util.*;
+
+class electric_bill {
+	
+	private String name;
+	private int unit;
+	
+	void getdata()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the name:");
+		name=sc.next();
+		System.out.println("Enter the eletricity units:");
+		unit=sc.nextInt();
+	}
+	void display()
+	{
+		System.out.println("Name:"+name);
+		System.out.println("Units:"+unit);
+
+	}
+	void calculate()
+	{
+		double cost=0;
+		if(unit<=100)//0 to 100
+		{
+			cost=unit*0.60+50;
+			
+		}
+		else if(unit>100 && unit<=300)//100 to 300
+		{
+	
+			cost=100*0.60+(unit-100)*0.80+50; 
+		
+		}
+		else //if(unit>300)
+		{
+			cost=(100*0.60)+(200*0.80)+(unit-300)*0.90+50;
+			
+		}
+		
+		if(cost>300)//beyond 300
+		{
+			System.out.println("The cost is "+cost);
+			cost=cost+cost*15/100;//Additional charge as units are above 300
+			System.out.println("The Final cost is:"+cost);
+		}
+		else
+		{
+			System.out.println("The Final cost is:"+cost);
+		}
+	}
+
+}
+public class Prsample3 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc=new Scanner(System.in);
+		electric_bill e=new electric_bill();
+	    int l;
+		do 
+		{
+			System.out.println("\nEnter the operation to be performed:\n1)Insert\n2)Display\n3)Exit\n(1,2,3):");
+			l=sc.nextInt();
+			switch(l)
+			{
+			case 1:
+				e.getdata();
+				break;
+			case 2:
+				e.display();
+				e.calculate();
+				break;
+			case 3:
+				System.out.println("The End");
+				break;
+			case 4:
+				System.out.println("Wrong choice");
+			}
+		}while(l!=3);
+		
+				
+	}
+
+}
+************************************************************************************************OUTPUT******************************************************************************************************
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+1
+Enter the name:
+Abhi
+Enter the eletricity units:
+74
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+2
+Name:Abhi
+Units:74
+The Final cost is:94.4
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+1
+Enter the name:
+Bhim
+Enter the eletricity units:
+274
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+2
+Name:Bhim
+Units:274
+The Final cost is:249.20000000000002
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+1
+Enter the name:
+Cynthia
+Enter the eletricity units:
+400
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+2
+Name:Cynthia
+Units:400
+The cost is 360.0
+The Final cost is:414.0
+
+Enter the operation to be performed:
+1)Insert
+2)Display
+3)Exit
+(1,2,3):
+3
+The End

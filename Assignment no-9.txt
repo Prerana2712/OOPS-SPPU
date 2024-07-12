@@ -1,0 +1,295 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   9.	Design template class for matrix operation with relevant data members. Implement member functions to add two
+        matrices. Execute the code using C++ language
+*/
+//Source code:-
+#include <iostream>
+using namespace std;
+
+//if class is template all methods are also template(by default)
+template<class t>
+class matrix
+{
+	t mat[5][5];
+	int row;
+	int col;
+	public:
+	void getdata();
+	void add(matrix ,matrix );
+	void display();
+};
+
+template<class t>
+void matrix<t> :: getdata()
+{
+		
+	cout<<"\nRow:";
+	cin>>row;
+	cout<<"\nColoumn:";
+	cin>>col;
+	
+	for (int i = 0;i<row;i++ )
+	{
+		for (int j = 0;j<col;j++ )
+	   {
+        	cout<<"\nElements:";
+        	cin>>mat[i][j];
+      	}
+   	}
+}
+
+template<class t>
+void matrix<t> :: add(matrix x,matrix y)
+{
+	if(x.row==y.row && x.col==y.col)
+	{
+	
+	row=x.row;//to display row and coloumn elements without this no value is present in display function  
+	col=x.col;
+//	int sum[5][5];
+	for (int i=0;i<row;i++ )
+	{
+		for (int j=0;j<col;j++ )
+	   {
+        	mat[i][j]=x.mat[i][j]+y.mat[i][j];
+      	}
+   	}
+   }
+}
+
+template<class t>
+void matrix<t> :: display()
+{
+	for (int i = 0;i<row;i++ )
+	{
+		cout<<"\n";
+      for (int j = 0;j<col;j++ )
+	   {
+        
+        	cout<<"\t"<<mat[i][j];
+      	}
+      	cout<<"\n";
+   	}
+}
+
+int main()
+{
+	
+	int l;
+	do
+	{
+		cout<<"\nEnter the operation to be performed:";
+		cout<<"\n1)Addition of two integer matrix";
+		cout<<"\n2)Addition of two float matrix";
+		cout<<"\n3)Addition of two double matrix";
+		cout<<"\n4)Exit";
+		cout<<"\n(1,2,3,4)";
+		cin>>l;
+		switch(l)
+		{
+			case 1:
+				
+				matrix<int> m1,m2,m3;//*t replaed bu int *done statically *
+	
+				cout<<"First:";
+				m1.getdata();
+				cout<<"Second:";
+				m2.getdata();
+	
+				cout<<"First matrix is :";
+				m1.display();
+				cout<<"Second matrix is :";
+				m2.display();
+	
+				m3.add(m1,m2);
+				cout<<"Addition of two integer matrix is :";
+				m3.display();
+				break;
+				
+			case 2:
+				
+				matrix<float> m4,m5,m6;
+	
+				cout<<"First:";
+				m4.getdata();
+				cout<<"Second:";
+				m5.getdata();
+	
+				cout<<"First matrix is :";
+				m4.display();
+				cout<<"Second matrix is :";
+				m5.display();
+	
+				m6.add(m4,m5);
+				cout<<"Addition of two float matrix is :";
+				m6.display();
+				break;
+			
+			case 3:
+				
+				matrix<double> m7,m8,m9;
+	
+				cout<<"First:";
+				m7.getdata();
+				cout<<"Second:";
+				m8.getdata();
+	
+				cout<<"First matrix is :";
+				m7.display();
+				cout<<"Second matrix is :";
+				m8.display();
+	
+				m9.add(m7,m8);
+				cout<<"Addition of two double matrix is :";
+				m9.display();
+				break;
+				
+			case 4:
+				cout<<"The end";
+				break;
+			
+			default:
+				cout<<"Wrong choice";
+				
+		}
+	}while(l!=4);
+}
+***********************************************************************************************OUTPUT*******************************************************************************************************
+
+Enter the operation to be performed:
+1)Addition of two integer matrix
+2)Addition of two float matrix
+3)Addition of two double matrix
+4)Exit
+(1,2,3,4)1
+First:
+Row:2
+
+Coloumn:2
+
+Elements:1
+
+Elements:2
+
+Elements:3
+
+Elements:4
+Second:
+Row:2
+
+Coloumn:2
+
+Elements:2
+
+Elements:3
+
+Elements:4
+
+Elements:2
+First matrix is :
+        1       2
+
+        3       4
+Second matrix is :
+        2       3
+
+        4       2
+Addition of two integer matrix is :
+        3       5
+
+        7       6
+
+Enter the operation to be performed:
+1)Addition of two integer matrix
+2)Addition of two float matrix
+3)Addition of two double matrix
+4)Exit
+(1,2,3,4)2
+First:
+Row:2
+
+Coloumn:2
+
+Elements:2.1
+
+Elements:2.3
+
+Elements:3.4
+
+Elements:4.1
+Second:
+Row:2
+
+Coloumn:2
+
+Elements:1.2
+
+Elements:4.2
+
+Elements:3.1
+
+Elements:5.1
+First matrix is :
+        2.1     2.3
+
+        3.4     4.1
+Second matrix is :
+        1.2     4.2
+
+        3.1     5.1
+Addition of two float matrix is :
+        3.3     6.5
+
+        6.5     9.2
+
+Enter the operation to be performed:
+1)Addition of two integer matrix
+2)Addition of two float matrix
+3)Addition of two double matrix
+4)Exit
+(1,2,3,4)3
+First:
+Row:2
+
+Coloumn:2
+
+Elements:3.22
+
+Elements:1.234
+
+Elements:2.313
+
+Elements:4.125
+Second:
+Row:2
+
+Coloumn:2
+
+Elements:3.123
+
+Elements:4.213
+
+Elements:1.515
+
+Elements:3.262
+First matrix is :
+        3.22    1.234
+
+        2.313   4.125
+Second matrix is :
+        3.123   4.213
+
+        1.515   3.262
+Addition of two double matrix is :
+        6.343   5.447
+
+        3.828   7.387
+
+Enter the operation to be performed:
+1)Addition of two integer matrix
+2)Addition of two float matrix
+3)Addition of two double matrix
+4)Exit
+(1,2,3,4)4
+The end

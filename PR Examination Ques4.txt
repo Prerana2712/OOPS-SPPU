@@ -1,0 +1,345 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*
+	4.	Student Management System
+	Create a program for maintaining a database of student records using Files. 
+	Student has student_id, name, roll_no, class, marks and address. Display the data for few students. 
+	a.	Create Database 
+	b.	Display Database 
+	c.	Delete Records 
+	d.	Update Record
+	e.	Search Record 
+
+*/
+//Source code:-
+package practical;
+
+import java.util.*;
+import java.io.*;
+
+class Student implements Serializable{
+    
+	int student_id;
+	String name;
+	int roll_no, std;
+	int marks;
+	String address;
+
+    public Student() {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the student id:");
+		student_id=sc.nextInt();
+		System.out.println("Enter the name:");
+		name=sc.next();
+		System.out.println("Enter the roll no:");
+		roll_no=sc.nextInt();
+		System.out.println("Enter the class:");
+		std=sc.nextInt();
+		System.out.println("Enter the marks:");
+		marks=sc.nextInt();
+		System.out.println("Enter the address:");
+	    address=sc.next();
+    }
+
+    public void display() {
+		
+    	System.out.println( student_id+" \t "+name+" \t "+roll_no+" \t "+std+" \t "+marks+" \t "+address);
+
+    }
+
+}
+
+public class Database{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		 Scanner sc=new Scanner(System.in);
+
+	        int n=0;
+	        int curr=0;
+	        Student s[] =new Student[15];
+
+	        int ch;
+	        do {
+	        	System.out.println("\nEnter the operation to be performed:");
+				System.out.println("1)Create Database");
+				System.out.println("2)Display Database");
+				System.out.println("3)Delete Record");
+				System.out.println("4)Update Record");
+				System.out.println("5)Search Record");
+				System.out.println("6)Exit");
+				System.out.println("(1,2,3,4,5,6):");
+	        	ch=sc.nextInt();
+	            switch(ch) {
+	                case 1:
+	                    System.out.println("\nEnter the no of records you want:");
+	                    n=sc.nextInt();
+	                    for(int i=curr;i<n+curr;i++) {
+	                        s[i]=new Student();
+	                    }
+	                    curr=n+curr;
+	                    try {
+	                        ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("student.txt"));
+	                        os.writeObject(s);
+	                        os.close();
+	                    }
+	                    catch(Exception e){
+	                        System.out.print(e);
+	                    }
+	                    break;
+	                case 2:
+	                    try {
+	                        ObjectInputStream is=new ObjectInputStream(new FileInputStream("student.txt"));
+	                        Student s1[]=(Student[])is.readObject();
+	                    	System.out.println( "Student_id\tName\tRollno\tStd\tMarks\tAddress");
+	                        for(int i=0;i<curr;i++) {
+	                            s1[i].display();
+	                        }
+	                        is.close();
+
+	                    }
+	                    catch(Exception e) {
+	                        System.out.println(e);
+	                    }
+	                    break;
+	                case 3:
+	                    int del;
+	                    try {
+	                        ObjectInputStream is=new ObjectInputStream(new FileInputStream("student.txt"));
+	                        Student s1[]=(Student[])is.readObject();
+	                        do {
+	                            System.out.println("\nEnter the roll no to be Deleted:");
+	                            del=sc.nextInt();
+	                            if(0<del&&del<=curr){
+	                                for(int i=del-1;i<curr;i++) {
+	                                    s[i]=s[i+1];
+	                                }
+	                                curr=curr-1;}
+	                            else{
+	                                System.out.println("Record not found\nEnter the valid rollno:");}
+	                        }while(0>del||del>n);
+	                        is.close();
+	                    }
+	                    catch(Exception e) {
+	                        System.out.print(e);
+	                    }
+	                    try {
+	                        ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("student.txt"));
+	                        os.writeObject(s);
+	                        os.close();
+	                    }
+	                    catch(Exception e){
+	                        System.out.print(e);
+	                    }
+	                    break;
+	                case 4:
+	                    try {
+	                        ObjectInputStream is=new ObjectInputStream(new FileInputStream("student.txt"));
+	                        Student s1[]=(Student[])is.readObject();
+	                        int mod;
+	                        do {
+	                            System.out.println("\nEnter the roll no to be Update:");
+	                            mod=sc.nextInt();
+	                            if(0<mod&&mod<=curr) {
+	                                s[mod-1]=new Student();}
+	                            else {
+	                                System.out.println("Record not found\\nEnter the valid rollno:");
+	                            }}while(0>mod||mod>curr);
+	                        is.close();
+
+	                    }
+	                    catch(Exception e) {
+	                        System.out.println(e);
+	                    }
+	                    try {
+	                        ObjectOutputStream os=new ObjectOutputStream(new FileOutputStream("student.txt"));
+	                        os.writeObject(s);
+	                        os.close();
+	                    }
+	                    catch(Exception e){
+	                        System.out.print(e);
+	                    }
+	                    break;
+	                case 5:
+	                    try {
+	                        ObjectInputStream is=new ObjectInputStream(new FileInputStream("student.txt"));
+	                        Student s1[]=(Student[])is.readObject();
+	                        int search;
+	                        System.out.println("\nEnter the roll no to be searched:");
+	                        search=sc.nextInt();
+	                    	System.out.println( "Student_id\tName\tRollno\tStd\tMarks\tAddress");
+	                        s[search -1].display();
+	                        is.close();
+	                    }
+	                    catch(Exception e) {
+	                        System.out.println(e);
+	                    }
+	                    break;
+	                case 6:
+	    				System.out.println("The End");
+	    				break;
+	    			default:
+	    				System.out.println("Wrong Choice");
+	    				break;
+
+	            }
+
+	        }while(ch!=6);
+
+	}
+
+}
+**********************************************************************************************OUTPUT********************************************************************************************************
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+1
+
+Enter the no of records you want:
+3
+Enter the student id:
+101
+Enter the name:
+Abhi
+Enter the roll no:
+01
+Enter the class:
+2
+Enter the marks:
+75
+Enter the address:
+Pune
+Enter the student id:
+102
+Enter the name:
+Bhim
+Enter the roll no:
+02
+Enter the class:
+2
+Enter the marks:
+85
+Enter the address:
+Dehu
+Enter the student id:
+103
+Enter the name:
+Caira
+Enter the roll no:
+03
+Enter the class:
+2
+Enter the marks:
+89
+Enter the address:
+Dighi
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+2
+Student_id	Name	Rollno	Std	Marks	Address
+101 	 Abhi 	 1 	 2 	 75 	 Pune
+102 	 Bhim 	 2 	 2 	 85 	 Dehu
+103 	 Caira 	 3 	 2 	 89 	 Dighi
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+3
+
+Enter the roll no to be Deleted:
+3
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+2
+Student_id	Name	Rollno	Std	Marks	Address
+101 	 Abhi 	 1 	 2 	 75 	 Pune
+102 	 Bhim 	 2 	 2 	 85 	 Dehu
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+4
+
+Enter the roll no to be Update:
+1
+Enter the student id:
+101
+Enter the name:
+Abhi
+Enter the roll no:
+1
+Enter the class:
+2
+Enter the marks:
+79
+Enter the address:
+Ravet
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+2
+Student_id	Name	Rollno	Std	Marks	Address
+101 	 Abhi 	 1 	 2 	 79 	 Ravet
+102 	 Bhim 	 2 	 2 	 85 	 Dehu
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+5
+
+Enter the roll no to be searched:
+2
+Student_id	Name	Rollno	Std	Marks	Address
+102 	 Bhim 	 2 	 2 	 85 	 Dehu
+
+Enter the operation to be performed:
+1)Create Database
+2)Display Database
+3)Delete Record
+4)Update Record
+5)Search Record
+6)Exit
+(1,2,3,4,5,6):
+6
+The End

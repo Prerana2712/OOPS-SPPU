@@ -1,0 +1,367 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*
+ * 2.	Bank Management System
+		Problem Statement: Assume that a bank maintains two kinds of accounts for customers, one called as saving account and the other as
+	    current account. The saving account provides compound interest and withdrawal facility. The current account provides cheque book 
+	    facility but no interest. Current account holders should also maintain the minimum balance and if the balance falls below this 
+	    level, a service charge is imposed.
+		Design a class account that stores customer name, account number and type of account. From this derive the classes cur_acct and sav_acct to make them more specific to their requirements. Include necessary methods in order to achieve following tasks:
+		a.	Accept deposit from the customer and update the balance
+		b.	Display the balance
+		c.	Compute and deposit interest.
+		d.	Permit withdrawal and update the balance
+		e.	Check the minimum balance, impose penalty, and update the balance. 
+
+*/
+//Source code:-
+import java.util.*;
+
+class account
+{
+	private String name ,acc_no;
+	
+	void getdata()
+	{
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter Name of the Customer:");
+	name=sc.next();
+	System.out.println("Enter Account no of the Customer:");
+	acc_no=sc.next();
+	
+	}
+	void display()
+	{
+		System.out.println(" Name of the Customer:"+name);
+		System.out.println("Account no of the Customer:"+acc_no);
+		
+	}
+}
+
+class cur_acct extends account
+{
+	private int bal=1500,depo,withd;
+	int flag=0;
+	int ser_charge=100;
+	cur_acct()
+	{
+	super.getdata();
+	}
+	void check_book()
+	{
+		int s;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Do you want cheque book facility:\n(1)yes/(2)no):");
+		s=sc.nextInt();
+		if(s==1)
+		{
+			System.out.println("Your request for cheque book application is been registered");
+		}
+		return;
+		
+	}
+	void deposit()
+	{
+		if(bal<=1000)
+		{
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Minimum balance present in account!!");
+			flag =1;
+			
+		}
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter amount to be deposited:");
+			depo=sc.nextInt();
+			if(flag==0)
+			{
+				bal=bal+depo;		
+				super.display();
+				System.out.println("After deposit");
+				System.out.println("Balence:"+bal);
+			}
+			else
+			{int u;
+				u=bal+depo;
+				bal=u-ser_charge;
+				super.display();
+				System.out.println("After deposit and deduction of penalty charge(Rs 100)");
+				System.out.println("Balence:"+bal);
+			}
+			
+	}
+	void withdraw()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the amount to be withdrawn:");
+		withd=sc.nextInt();
+		if(withd<=bal)
+		{
+		bal=bal-withd;	
+		super.display();
+		System.out.println("After Withdrawal");
+		System.out.println("Balence:"+bal);
+		}
+		else
+		{
+			System.out.println("You cannot withdraw");
+		}
+	}
+	
+}
+
+class sav_acct extends account
+{
+	private int bal=1000,depo,withd;
+	double intrest_rate=0.02,a,p,total;
+	int y;
+	sav_acct()
+	{
+	super.getdata();
+	}
+	void deposit()
+	{
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter amount to be deposited:");
+			depo=sc.nextInt();
+			System.out.println("Enter the duration for which you want to have deposit:");
+			y=sc.nextInt();
+			bal=bal+depo;
+			a=(1+intrest_rate);
+			p=Math.pow(a,y);
+			total=bal*p;
+			super.display();
+			System.out.println("Total value of deposit after intrest"+total);
+			System.out.println("After deposit");
+			System.out.println("Balence:"+bal);
+	}
+	void withdraw()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the amount to be withdrawn:");
+		withd=sc.nextInt();
+		if(withd<=bal)
+		{
+		bal=bal-withd;	
+		super.display();
+		System.out.println("After Withdraval");
+		System.out.println("Balence:"+bal);
+		}
+		else
+		{
+			System.out.println("You cannot withdraw");
+		}
+	}
+}
+
+
+public class Prsample2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		int l;
+		
+		do
+		{
+		
+			System.out.println("\nChoose the type of Account you have:\n1)Saving\n2)Current\n3)Exit\n(1,2,3):");
+			l=sc.nextInt();
+			switch(l)
+			{
+			case 1:
+				sav_acct s=new sav_acct();
+				int ch1;
+				do
+				{
+				System.out.println("\nEnter the operation to be performed:\n1)Deposit\n2)Withdraw\n3)Exit\n(1,2,3):");
+				ch1=sc.nextInt();
+				switch(ch1)
+				{
+				case 1:
+					s.deposit();
+					break;
+				case 2:
+					s.withdraw();
+					break;
+				case 3:
+					break;
+				default:
+					System.out.println("wrong choice");
+
+				}
+				}while(ch1!=3);
+				break;
+			case 2:
+				cur_acct c=new cur_acct();
+				int ch2;
+				do
+				{
+				System.out.println("\nEnter the operation to be performed:\n1)Deposit\n2)Withdraw\n3)Checkbook facility\n4)Exit\n(1,2,3):");
+				ch2=sc.nextInt();
+				switch(ch2)
+				{
+				case 1:
+					c.deposit();
+					break;
+				case 2:
+					c.withdraw();
+					break;
+				case 3:
+					c.check_book();
+				case 4:
+					break;
+				default:
+					System.out.println("wrong choice");
+
+				}
+				}while(ch2!=4);
+			
+				break;
+			case 3:
+				System.out.println("The End");
+				break;
+			default:
+				System.out.println("wrong choice");
+			}
+
+		}while(l!=3);
+	}
+
+}
+***********************************************************************************************OUTPUT*******************************************************************************************************
+
+Choose the type of Account you have:
+1)Saving
+2)Current
+3)Exit
+(1,2,3):
+1
+Enter Name of the Customer:
+Ram
+Enter Account no of the Customer:
+1425367485
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Exit
+(1,2,3):
+1
+Enter amount to be deposited:
+1500
+Enter the duration for which you want to have deposit:
+2
+ Name of the Customer:Ram
+Account no of the Customer:1425367485
+Total value of deposit after intrest2601.0
+After deposit
+Balence:2500
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Exit
+(1,2,3):
+2
+Enter the amount to be withdrawn:
+1800
+ Name of the Customer:Ram
+Account no of the Customer:1425367485
+After Withdraval
+Balence:700
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Exit
+(1,2,3):
+3
+
+Choose the type of Account you have:
+1)Saving
+2)Current
+3)Exit
+(1,2,3):
+2
+Enter Name of the Customer:
+Rashi
+Enter Account no of the Customer:
+7898564525
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Checkbook facility
+4)Exit
+(1,2,3):
+1
+Enter amount to be deposited:
+1500
+ Name of the Customer:Rashi
+Account no of the Customer:7898564525
+After deposit
+Balence:3000
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Checkbook facility
+4)Exit
+(1,2,3):
+2
+Enter the amount to be withdrawn:
+2200
+ Name of the Customer:Rashi
+Account no of the Customer:7898564525
+After Withdrawal
+Balence:800
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Checkbook facility
+4)Exit
+(1,2,3):
+1
+Minimum balance present in account!!
+Enter amount to be deposited:
+1000
+ Name of the Customer:Rashi
+Account no of the Customer:7898564525
+After deposit and deduction of penalty charge(Rs 100)
+Balence:1700
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Checkbook facility
+4)Exit
+(1,2,3):
+3
+Do you want cheque book facility:
+(1)yes/(2)no):
+1
+Your request for cheque book application is been registered
+
+Enter the operation to be performed:
+1)Deposit
+2)Withdraw
+3)Checkbook facility
+4)Exit
+(1,2,3):
+4
+
+Choose the type of Account you have:
+1)Saving
+2)Current
+3)Exit
+(1,2,3):
+4
+wrong choice
+
+Choose the type of Account you have:
+1)Saving
+2)Current
+3)Exit
+(1,2,3):
+3
+The End

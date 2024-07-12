@@ -1,0 +1,370 @@
+  
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+   7.	Design and develop inheritance for a given case study: Employee class has Emp_name, Emp_id, Address,
+        Mail_id, and Mobile_no as members (instance variables). Inherit the classes: Programmer, Team Lead,
+        Assistant Project Manager and Project Manager from employee class. Add Basic Pay (BP) as the member
+        of all the inherited classes with 97% of BP as DA, 10 % of BP as HRA, 12% of BP as PF, 0.1% of BP 
+        for staff club fund. Generate pay slips for the employees with their gross and net salary.
+
+*/
+//Source code:-
+package practical;
+import java.util.*;
+
+class employee
+{
+	private String Emp_name, Mobile_no,add;
+	private int Emp_id;
+	private String Mail_id;
+	
+	public employee()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter Name of the Employee:");
+		Emp_name = sc.next();
+		System.out.println("Enter Employee ID:");
+		Emp_id= sc.nextInt();
+		System.out.println("Enter Address:");
+		add = sc.next();
+		System.out.println("Enter Mail-ID:");
+		Mail_id = sc.next();
+		
+	 
+		int flag=0;
+		do {
+				System.out.println("Enter Phone number:");
+				Mobile_no = sc.next();
+				int l = Mobile_no.length();
+				if(l==10)
+				{
+					System.out.println("Phone number is valid");
+					flag=1;
+				}
+				else 
+				{
+					System.out.println("Phone number is not valid");
+		
+				}
+			}while(flag!=1);
+	}
+	 void display()
+	 {
+	
+		 System.out.println("Name:"+Emp_name);
+		 System.out.println("ID:"+Emp_id);
+		 System.out.println("Address:"+add);
+		 System.out.println("Mail-id:"+Mail_id);
+		 System.out.println("Phno:"+Mobile_no);
+		
+	 }
+	
+		
+	
+}
+
+//Programmer pay slip
+class programer extends employee
+{
+	private double bp,net,gross;
+	
+	public programer()
+	{ 
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter basic pay for programmer:");
+		bp = sc.nextDouble();
+	}
+	void salary_pay()
+	{
+		 
+		 gross=bp+0.97*bp+0.1*bp+0.12*bp+0.001*bp;
+		 net=bp+0.97*bp+0.1*bp-0.12*bp-0.001*bp;
+	}
+	void display()
+	{
+		System.out.println("********************************************");
+		 System.out.println("PAY SLIP:");
+		 
+		 super.display();
+		
+		 System.out.println("Gross:"+gross);
+		 System.out.println("Net:"+net);
+		 System.out.println("********************************************");
+		
+	}
+}
+
+//Team lead pay slip
+class Teamlead extends employee
+{
+	private double bp,net,gross;
+	
+	public Teamlead()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter basic pay for Teamlead:");
+		bp = sc.nextDouble();
+	}
+	void salary_pay()
+	{
+		 gross=bp+0.97*bp+0.1*bp+0.12*bp+0.001*bp;
+		 net=bp+0.97*bp+0.1*bp-0.12*bp-0.001*bp;
+	}
+	void display()
+	{
+		System.out.println("********************************************");
+		 System.out.println("PAY SLIP:");
+		 
+		 super.display();
+		
+		 System.out.println("Gross:"+gross);
+		 System.out.println("Net:"+net);
+		 System.out.println("********************************************");
+	}
+}
+
+//Assistant project manager pay slip
+class AssProj extends employee
+{
+	private double bp,net,gross;
+	
+	public AssProj()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter basic pay for Assistant Project manager:");
+		bp = sc.nextDouble();
+	}
+	void salary_pay()
+	{
+		gross=bp+0.97*bp+0.1*bp+0.12*bp+0.001*bp;
+		net=bp+0.97*bp+0.1*bp-0.12*bp-0.001*bp;
+	}
+	void display()
+	{	
+		 System.out.println("********************************************");
+		 System.out.println("PAY SLIP:");
+		 
+		 super.display();
+		
+		 System.out.println("Gross:"+gross);
+		 System.out.println("Net:"+net);
+		 System.out.println("********************************************");
+	}
+}
+
+//Project manager pay slip
+class Projmanager extends employee
+{
+	private double bp,net,gross;
+	
+	public Projmanager()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter basic pay for Project Manager:");
+		bp=sc.nextDouble();
+	}
+	void salary_pay()
+	{
+		gross=bp+0.97*bp+0.1*bp+0.12*bp+0.001*bp;
+		net=bp+0.97*bp+0.1*bp-0.12*bp-0.001*bp;
+	}
+	void display()
+	{
+		System.out.println("********************************************");
+		 System.out.println("PAY SLIP:");
+		 
+		 super.display();
+		
+		 System.out.println("Gross:"+gross);
+		 System.out.println("Net:"+net);
+		 System.out.println("********************************************");
+	}
+}
+public class salaryslip {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		int l;
+		do {
+			System.out.println("Enter the choice (Salary Slip of):");
+			System.out.println("1)Programmer");
+			System.out.println("2)Teamlead");
+			System.out.println("3)Assistant Project Manager");
+			System.out.println("4)Project Manager");
+			System.out.println("5)Exit");
+			System.out.println("(1,2,3,4,5):");
+			l=s.nextInt();
+			
+			switch(l) {
+			case 1:
+				programer obj1=new programer();
+				obj1.salary_pay();
+				obj1.display();
+				break;
+			case 2:
+				Teamlead obj2=new Teamlead();
+				obj2.salary_pay();
+				obj2.display();
+				break;
+			case 3:
+				AssProj obj3= new AssProj();
+				obj3.salary_pay();
+				obj3.display();
+				break;`
+			case 4:
+				Projmanager obj4= new Projmanager();
+				obj4.salary_pay();
+				obj4.display();
+				break;
+			case 5:
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Wrong choice");
+			}
+		}while(l!=5);
+	
+	}
+
+}
+
+
+*********************************************************************************************OUTPUT*********************************************************************************************************
+
+Enter the choice (Salary Slip of):
+1)Programmer
+2)Teamlead
+3)Assistant Project Manager
+4)Project Manager
+5)Exit
+(1,2,3,4,5):
+1
+Enter Name of the Employee:
+ravi
+Enter Employee ID:
+01
+Enter Address:
+pune
+Enter Mail-ID:
+ravi@gmail.com
+Enter Phone number:
+9307556318
+Phone number is valid
+Enter basic pay for programmer:
+10000
+********************************************
+PAY SLIP:
+Name:ravi
+ID:1
+Address:pune
+Mail-id:ravi@gmail.com
+Phno:9307556318
+Gross:21910.0
+Net:19490.0
+********************************************
+Enter the choice (Salary Slip of):
+1)Programmer
+2)Teamlead
+3)Assistant Project Manager
+4)Project Manager
+5)Exit
+(1,2,3,4,5):
+2
+Enter Name of the Employee:
+kishan
+Enter Employee ID:
+02
+Enter Address:
+chinchwad
+Enter Mail-ID:
+kishan@gmail.com
+Enter Phone number:
+88056234852
+Phone number is not valid
+Enter Phone number:
+8805396045
+Phone number is valid
+Enter basic pay for Teamlead:
+12000
+********************************************
+PAY SLIP:
+Name:kishan
+ID:2
+Address:chinchwad
+Mail-id:kishan@gmail.com
+Phno:8805396045
+Gross:26292.0
+Net:23388.0
+********************************************
+Enter the choice (Salary Slip of):
+1)Programmer
+2)Teamlead
+3)Assistant Project Manager
+4)Project Manager
+5)Exit
+(1,2,3,4,5):
+3
+Enter Name of the Employee:
+kirti
+Enter Employee ID:
+03
+Enter Address:
+nigdi
+Enter Mail-ID:
+kirti@gmail.com
+Enter Phone number:
+6354415754
+Phone number is valid
+Enter basic pay for Assistant Project manager:
+14000
+********************************************
+PAY SLIP:
+Name:kirti
+ID:3
+Address:nigdi
+Mail-id:kirti@gmail.com
+Phno:6354415754
+Gross:30674.0
+Net:27286.0
+********************************************
+Enter the choice (Salary Slip of):
+1)Programmer
+2)Teamlead
+3)Assistant Project Manager
+4)Project Manager
+5)Exit
+(1,2,3,4,5):
+4
+Enter Name of the Employee:
+anupama
+Enter Employee ID:
+04
+Enter Address:
+dighi
+Enter Mail-ID:
+anupama@gmail.com
+Enter Phone number:
+4565424824
+Phone number is valid
+Enter basic pay for Project Manager:
+16000
+********************************************
+PAY SLIP:
+Name:anupama
+ID:4
+Address:dighi
+Mail-id:anupama@gmail.com
+Phno:4565424824
+Gross:35056.0
+Net:31184.0
+********************************************
+Enter the choice (Salary Slip of):
+1)Programmer
+2)Teamlead
+3)Assistant Project Manager
+4)Project Manager
+5)Exit
+(1,2,3,4,5):
+5
+

@@ -1,0 +1,97 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+  10.	Design template function for sorting an array in ascending/descending order. Execute the code using C++
+  	    language.
+*/
+//Source code:-
+#include<iostream>
+using namespace std;
+template <class t>
+void sort(t a[],int n)
+{
+	int i,flag=0;
+	for(i=0;i<n-1;i++)
+	{
+		int j;
+		for(j=0;j<n-1;j++)
+		{
+			if(a[j]>a[j+1])
+			{
+				t temp=a[j];
+				a[j]=a[j+1];
+				a[j+1]=temp;
+			}
+		}
+
+	}
+	cout<<"\nSorted array is:";
+	for(i=0;i<n;i++)
+	{
+		cout<<"\t"<<a[i];
+	}
+}
+int main()
+{
+	int arr[10];
+	float arr1[10];
+	int n,l;
+	cout<<"\nEnter the number of element you want to be present in array:";
+	cin>>n;
+	do{
+		cout<<"\nEnter the operation to be performed:\n1)Sorting an Int array\n2)Sorting an Float array\n3)Exit\n(1,2,3):";
+		cin>>l;
+		switch(l)
+		{
+			case 1:
+				cout<<"\nEnter the elements:";
+				for(int i=0;i<n;i++)
+				{
+					cin>>arr[i];
+				}
+				sort(arr,n);
+				break;
+			case 2:
+				cout<<"\nEnter the elements:";
+				for(int j=0;j<n;j++)
+				{
+					cin>>arr1[j];
+				}
+				sort(arr1,n);
+				break;
+			case 3:
+				cout<<"The End";
+				break;
+			default:
+				cout<<"Wrong choice";
+				
+		}
+	}while(l!=3);
+
+}
+*****************************************************************************************************OUTPUT*************************************************************************************************
+Enter the number of element you want to be present in array:5
+
+Enter the operation to be performed:
+1)Sorting an Int array
+2)Sorting an Float array
+3)Exit
+(1,2,3):1
+
+Enter the elements:7    5       1       3       2
+
+Sorted array is:        1       2       3       5       7
+Enter the operation to be performed:
+1)Sorting an Int array
+2)Sorting an Float array
+3)Exit
+(1,2,3):2
+
+Enter the elements:3.2  1.2     7.2     5.2     4.3
+
+Sorted array is:        1.2     3.2     4.3     5.2     7.2
+Enter the operation to be performed:
+1)Sorting an Int array
+2)Sorting an Float array
+3)Exit
+(1,2,3):3
+The End

@@ -1,0 +1,417 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*PROBLEM STATEMENT:-
+  6.	Write a program for maintaining a database of student records and perform the following operations using multilevel inheritance (student1->student2->student3). 
+		A)Create Database 
+		B)Display Database 
+		C)Delete Records 
+		D)Update Record
+		E)Search Record 
+		F)Insert the record
+*/
+//Source code:-
+********************************************************************************************STUDENT1*******************************************************************************************************
+package multilevel;
+
+public class Student1 {
+	
+	protected String name;
+	protected int rollno;
+	protected int age;
+	
+
+}
+
+*****************************************************************************************STUDENT2**********************************************************************************************************
+package multilevel;
+
+import java.util.Scanner;
+
+class Student2 extends Student1 {
+
+	protected String mobile_no;
+	protected String add;
+	
+}
+
+***************************************************************************************STUDENT_3***********************************************************************************************************
+package multilevel;
+
+import java.util.Scanner;
+
+
+public class Student_3 extends Student2 {
+
+private String email_id;
+	
+	
+	public void getdata()
+	{
+	
+		Scanner sc=new Scanner(System.in);
+		 
+		System.out.println("Enter the name:");
+		name=sc.next();
+		
+		System.out.println("Enter the age:");
+		age=sc.nextInt();
+		
+		System.out.println("Enter the rollno:");
+		rollno=sc.nextInt();
+		
+		
+		int flag=0;
+		do {
+				System.out.println("Enter Mobile number:");
+				mobile_no = sc.next();
+				int l = mobile_no.length();
+				if(l==10)
+				{
+					System.out.println("Mobile number is valid");
+					flag=1;
+				}
+				else 
+				{
+					System.out.println("Mobile number is not valid");
+		
+				}
+			}while(flag!=1);
+		
+		System.out.println("Enter the add:");
+		add=sc.next();
+		
+		System.out.println("Enter the emailid:");
+		email_id=sc.next();
+		
+	}
+	
+	public void display()
+	{
+		System.out.println(name+" \t "+age+" \t "+rollno+" \t "+mobile_no+" \t "+add+" \t "+email_id);
+	}
+
+}
+
+**********************************************************************************************MAIN METHOD*************************************************************************************************
+package multilevel;
+
+import java.util.*;
+
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		 int i;
+		 Student_3[] a=new Student_3[15];
+		 for(i=0;i<15;i++){
+			 a[i]=new Student_3();
+				
+			}
+		 Scanner sc=new Scanner(System.in);
+		 
+		 int n;
+	     
+		 //Input number of records user want in database
+		 System.out.println("\nEnter the no of records you want:");
+		 n=sc.nextInt();
+		
+		 for(i=0;i<n;i++){
+			    a[i].getdata();// CALLING GETDATA FUNCTION	
+		    }
+			
+		 
+		 int l;
+			
+		  do{
+			
+				//Accept the operation to be performed by user
+			System.out.println("\nEnter the operation to be performed\n1)Display\n2)Add \n3)Delete \n4)Modify\n5)Search\n6)Exit\n(1,2,3,4,5,6)"); 
+			l=sc.nextInt();
+			
+			switch(l){
+			
+			
+			case 1:
+				
+			    System.out.println("\nName	Age	Rollno	Mobileno	Add	Email-id");
+			    for(i=0;i<n;i++){
+			        a[i].display();// Calling display function.
+			    }
+			    break;
+			case 2:
+				
+				//Adding a record in the database
+				System.out.println("\nAdd the record :");
+				
+				a[n].getdata();
+				
+				n=n+1;		
+			    System.out.println("\nUpdated database:");
+			    
+			    System.out.println("\nName	Age	Rollno	Mobileno	Add	Email-id");
+			    for(i=0;i<n;i++){
+				      a[i].display();  
+			       }
+			    break;
+			   
+			case 3:
+
+				//Deleting a record in the database
+				int del;
+				
+				System.out.println("\nDelete the record :");
+				del=sc.nextInt();
+				int flag=0;
+				 for(i=0;i<n;i++)
+				  {
+					  if(del<=n){
+						      for(i=del-1;i<n;i++){
+							       a[i]=a[i+1];
+							     }
+				                 flag=1;
+				                 n=n-1;
+				     			
+				    			 System.out.println("\nUpdated database:");
+				    			 
+				    			 System.out.println("\nName	Age	Rollno	Mobileno	Add	Email-id");
+				    			 for(i=0;i<n;i++){
+				    				    a[i].display();  
+				    			   }
+							       break;
+					  }
+				  }
+				 if(flag==0)
+		         {
+			        System.out.println("\nElement is not present in the array.");
+			       
+		         }
+				break;
+			
+			case 4:
+				
+				//Modify a record in database
+				int modify;
+				
+				System.out.println("\nEnter the record to modified :");
+				modify=sc.nextInt();
+				int f=0;
+				 for(i=0;i<n;i++)
+				  {
+					  if(modify<=n){
+				                 a[modify-1].getdata();
+				                // n=n+1;
+				     			System.out.println("\nUpdated database:");
+				     			
+				     			 System.out.println("\nName	Age	Rollno	Mobileno	Add	Email-id");
+				     			for(i=0;i<n;i++){
+				     				    a[i].display();  
+				     			  }
+				                 f=1;
+							       break;
+					  }
+				  }
+				 if(f==0)
+		         {
+			        System.out.println("\nElement is not present in the array.");
+			      
+		         }
+				break;
+				
+				
+			case 5:
+				//Searching a record in database
+				 int item;
+				
+						   
+				    System.out.println("\nSearch the record:");
+					item=sc.nextInt();
+					int l1=0;
+					 for(i=0;i<n;i++)
+					  {
+						  if(item<=n){
+							  System.out.println("\nName	Age	Rollno	Mobileno	Add	Email-id");
+								  a[item-1].display();	
+							       l1=1;
+							       break;
+						       }
+				 	          }
+					         if(l1==0)
+					         {
+						        System.out.println("\nElement is not present in the array.");
+						      
+					         }
+				
+				break;
+				
+			case 6:
+				
+				System.out.println("\nThe end");
+				break;
+				
+			default:
+				System.out.println("\nwrong choice");
+			}
+			}while(l!=6);
+		}
+
+}
+
+****************************************************************************************************OUTPUT**************************************************************************************************
+
+Enter the no of records you want:
+2
+Enter the name:
+Abhi
+Enter the age:
+10
+Enter the rollno:
+01
+Enter Mobile number:
+9370553618
+Mobile number is valid
+Enter the add:
+Pune
+Enter the emailid:
+abhi@gmail.com
+Enter the name:
+Bhim
+Enter the age:
+10
+Enter the rollno:
+02
+Enter Mobile number:
+1425367485
+Mobile number is valid
+Enter the add:
+Thane
+Enter the emailid:
+bhim@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+1
+
+Name	Age	Rollno	Mobileno	Add	Email-id
+Abhi 	 10 	 1 	 9370553618 	 Pune 	 abhi@gmail.com
+Bhim 	 10 	 2 	 1425367485 	 Thane 	 bhim@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+2
+
+Add the record :
+Enter the name:
+Caira
+Enter the age:
+10
+Enter the rollno:
+03
+Enter Mobile number:
+8805396045
+Mobile number is valid
+Enter the add:
+Dehu
+Enter the emailid:
+caira@gmail.com
+
+Updated database:
+
+Name	Age	Rollno	Mobileno	Add	Email-id
+Abhi 	 10 	 1 	 9370553618 	 Pune 	 abhi@gmail.com
+Bhim 	 10 	 2 	 1425367485 	 Thane 	 bhim@gmail.com
+Caira 	 10 	 3 	 8805396045 	 Dehu 	 caira@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+3
+
+Delete the record :
+2
+
+Updated database:
+
+Name	Age	Rollno	Mobileno	Add	Email-id
+Abhi 	 10 	 1 	 9370553618 	 Pune 	 abhi@gmail.com
+Caira 	 10 	 3 	 8805396045 	 Dehu 	 caira@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+4
+
+Enter the record to modified :
+2
+Enter the name:
+Caira
+Enter the age:
+10
+Enter the rollno:
+03
+Enter Mobile number:
+784516598
+Mobile number is not valid
+Enter Mobile number:
+1425653274
+Mobile number is valid
+Enter the add:
+Dighi
+Enter the emailid:
+caira@gmail.com
+
+Updated database:
+
+Name	Age	Rollno	Mobileno	Add	Email-id
+Abhi 	 10 	 1 	 9370553618 	 Pune 	 abhi@gmail.com
+Caira 	 10 	 3 	 1425653274 	 Dighi 	 caira@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+5
+
+Search the record:
+2
+
+Name	Age	Rollno	Mobileno	Add	Email-id
+Caira 	 10 	 3 	 1425653274 	 Dighi 	 caira@gmail.com
+
+Enter the operation to be performed
+1)Display
+2)Add 
+3)Delete 
+4)Modify
+5)Search
+6)Exit
+(1,2,3,4,5,6)
+6
+
+The end

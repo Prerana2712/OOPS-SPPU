@@ -1,0 +1,398 @@
+// Name- Prerana Rajesh Gajare      Class-SEIT      RollNo-SI41  
+/*
+ * 	Write a program for maintaining a database of student records and perform the following operations using multilevel inheritance (student1->student2->student3). 
+	a.	Create Database 
+	b.	Display Database 
+	c.	Delete Records 
+	d.	Update Record
+	e.	Search Record 
+	f.	Insert the record
+ */
+package FInalpracticalExam;
+
+public class Student1 {
+
+	protected String name;
+	protected int age;
+	protected int rollno;
+}
+************************************************************************************************Student2******************************************************************************************************
+package FInalpracticalExam;
+
+public class Student2 extends Student1 {
+
+	protected String mob_no;
+	protected String add;
+}
+************************************************************************************************Student3******************************************************************************************************
+package FInalpracticalExam;
+import java.util.*;
+
+public class Student3 extends Student2{
+
+	private String email_id;
+	
+	void getdata()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("\nEnter the name:");
+		name=sc.next();
+		System.out.println("\nEnter the age:");
+		age=sc.nextInt();
+		System.out.println("\nEnter the rollno:");
+		rollno=sc.nextInt();
+		System.out.println("\nEnter the mobile number:");
+		mob_no=sc.next();
+		System.out.println("\nEnter the add:");
+		add=sc.next();
+		System.out.println("\nEnter the emailid:");
+		email_id=sc.next();
+		
+	}
+	void display()
+	{
+		System.out.println(name+"\t"+age+"\t"+rollno+"\t"+mob_no+"\t"+add+"\t"+email_id);
+	}
+}
+************************************************************************************************Main method*************************************************************************************************
+package FInalpracticalExam;
+import java.util.*;
+
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Student3[] s=new Student3[15];
+		for(int i=0;i<15;i++)
+		{
+			s[i]=new Student3();
+		}
+		
+		Scanner sc=new Scanner(System.in);
+		int n,l;
+		System.out.println("Enter the number of records you want in database:");
+		n=sc.nextInt();
+		do
+		{
+			System.out.println("\nEnter the operation you want to perform\n1)Create Database\n2)Display Database\n3)Delete Records\n4)Update Record\n5)Search Record\n6)Insert the record\n7)Exit\n(1,2,3,4,5,6,7):");
+			l=sc.nextInt();
+			switch(l)
+			{
+			case 1:
+				for(int i=0;i<n;i++)
+				{
+					s[i].getdata();
+				}
+				break;
+			case 2:
+				System.out.println("Name\tAge\tRollno\tMobilenumber\tAddress\tEmailid");
+				for(int i=0;i<n;i++)
+				{
+					s[i].display();
+				}
+				break;
+			case 3:
+				int del;
+				System.out.println("Enter the record you want to delete:");
+				del=sc.nextInt();
+				int flag=0;
+				for(int i=0;i<n;i++)
+				{
+					if(del<=n)
+					{
+						for(int j=del-1;j<n;j++)
+						{
+							s[j]=s[j+1];
+						}
+						flag=1;
+						n=n-1;
+						System.out.println("Name\tAge\tRollno\tMobilenumber\tAddress\tEmailid");
+						for(int k=0;k<n;k++)
+						{
+							s[k].display();
+						}
+						break;
+					}
+				}
+				if(flag==0)
+				{
+					System.out.println("Such record does not exist in the database");
+				}
+				
+				break;
+			case 4:
+				int upd;
+				System.out.println("\nEnter the record you want to update::");
+				upd=sc.nextInt();
+				int f=0;
+				 for(int i=0;i<n;i++)
+				  {
+					  if(upd<=n){
+				                 s[upd-1].getdata();
+								 System.out.println("Name\tAge\tRollno\tMobilenumber\tAddress\tEmailid");
+				     			for(i=0;i<n;i++){
+				     				    s[i].display();  
+				     			  }
+				                 f=1;
+							     break;
+					  }
+				  }
+				 if(f==0)
+		         {
+			        System.out.println("\nSuch record does not exist in the database");
+			      
+		         }
+				break;
+			case 5:
+				int item;
+				System.out.println("\nEnter the record you want to search:");
+				item=sc.nextInt();
+				int l1=0;
+				 for(int i=0;i<n;i++)
+				  {
+					  if(item<=n){
+						  System.out.println("Name\tAge\tRollno\tMobilenumber\tAddress\tEmailid");
+							  s[item-1].display();	
+						       l1=1;
+						       break;
+					       }
+			 	          }
+				         if(l1==0)
+				         {
+					        System.out.println("\nSuch record does not exist in the database");
+					      
+				         }
+			
+			break;
+			case 6:
+				s[n].getdata();
+				System.out.println("Name\tAge\tRollno\tMobilenumber\tAddress\tEmailid");
+				n=n+1;
+				for(int k=0;k<n;k++)
+				{
+					s[k].display();
+				}
+				break;
+			case 7:
+				System.out.println("The end");
+				break;
+			default:
+				System.out.println("Wrong choice");
+			}
+		}while(l!=7);
+	}
+
+}
+
+***************************************************************************************************OUTPUT***************************************************************************************************
+Enter the number of records you want in database:
+3
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+1
+
+Enter the name:
+Abhi
+
+Enter the age:
+10
+
+Enter the rollno:
+1
+
+Enter the mobile number:
+9370553618
+
+Enter the add:
+Pune
+
+Enter the emailid:
+abhi@gmail.com
+
+Enter the name:
+Bhim
+
+Enter the age:
+10
+
+Enter the rollno:
+02
+
+Enter the mobile number:
+8805396045
+
+Enter the add:
+Dehu
+
+Enter the emailid:
+bhim@gmail.com
+
+Enter the name:
+Caira
+
+Enter the age:
+10
+
+Enter the rollno:
+03
+
+Enter the mobile number:
+9985476541
+
+Enter the add:
+Dighi
+
+Enter the emailid:
+caira@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+2
+Name	Age	Rollno	Mobilenumber	Address	Emailid
+Abhi	10	1	9370553618	Pune	abhi@gmail.com
+Bhim	10	2	8805396045	Dehu	bhim@gmail.com
+Caira	10	3	9985476541	Dighi	caira@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+3
+Enter the record you want to delete:
+3
+Name	Age	Rollno	Mobilenumber	Address	Emailid
+Abhi	10	1	9370553618	Pune	abhi@gmail.com
+Bhim	10	2	8805396045	Dehu	bhim@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+4
+
+Enter the record you want to update::
+1
+
+Enter the name:
+Abhi
+
+Enter the age:
+10
+
+Enter the rollno:
+1
+
+Enter the mobile number:
+9865475241
+
+Enter the add:
+Dighi
+
+Enter the emailid:
+abhi@gmail.com
+Name	Age	Rollno	Mobilenumber	Address	Emailid
+Abhi	10	1	9865475241	Dighi	abhi@gmail.com
+Bhim	10	2	8805396045	Dehu	bhim@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+5
+
+Enter the record you want to search:
+2
+Name	Age	Rollno	Mobilenumber	Address	Emailid
+Bhim	10	2	8805396045	Dehu	bhim@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+5
+
+Enter the record you want to search:
+3
+
+Such record does not exist in the database
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+6
+
+Enter the name:
+Dev
+
+Enter the age:
+10
+
+Enter the rollno:
+4
+
+Enter the mobile number:
+8456475964
+
+Enter the add:
+Ravet
+
+Enter the emailid:
+dev@gmail.com
+Name	Age	Rollno	Mobilenumber	Address	Emailid
+Abhi	10	1	9865475241	Dighi	abhi@gmail.com
+Bhim	10	2	8805396045	Dehu	bhim@gmail.com
+Dev	10	4	8456475964	Ravet	dev@gmail.com
+
+Enter the operation you want to perform
+1)Create Database
+2)Display Database
+3)Delete Records
+4)Update Record
+5)Search Record
+6)Insert the record
+7)Exit
+(1,2,3,4,5,6,7):
+7
+The end
